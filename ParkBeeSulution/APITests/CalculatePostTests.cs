@@ -72,6 +72,7 @@ namespace ParkBeeSulution.APITests
         [TestCase("2020-03-18Z08:00:00", "2020-03-18Z08:30:00")]
         [TestCase("2020-03-15Z12:00:00", "2020-03-15Z12:00:00")]
         [TestCase("2020-03-15Z12:00:00", "2100-03-15Z12:00:00")]
+        [TestCase("2020-03-20Z12:00:00", "2100-03-20Z12:13:00")]
         /*The last one fails, the endpoint does not handle ridiculous dates in the future, 
          * returns a negative number. Well, theoretically it calculates, but maybe consider
          * an error message for such future dates */
@@ -86,12 +87,10 @@ namespace ParkBeeSulution.APITests
             costJson.Should().NotBeNull();
             costJson.Should().NotBeEmpty();
             costJson.Should().HaveCount(1);
-
-            /*Even though a float type is returned in json, I take the value as an int to be able to do comparison with zero.
-            Every case returned a number that could be parsed to int*/
-            var price = costJson.Value<int>("cost");
             
-            price.Should().BeGreaterOrEqualTo(0);
+            var cost = costJson.Value<double>("cost");
+            
+            cost.Should().BeGreaterOrEqualTo(0);
         }
 
         public RestRequest FormatCalculatePriceRequest(string endpoint, string garageID, string start, string end, string token)
