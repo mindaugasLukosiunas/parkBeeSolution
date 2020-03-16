@@ -11,10 +11,13 @@ namespace ParkBeeSulution.APITests
     class CalculatePostTests
     {
         RestClient _client;
-
+        /*The test is only for price calculation endpoint, 
+         * therefore some data is hard-coded that I got from other endpoints with postman.
+         * Of course getting this data should be done dynamically */
         string mainURL = "https://api-uat.parkbee.net";
         string endpoint = "/v1/garages/{0}/pricing/calculate";
-        string accessToken = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYmYiOjE1ODQyNjg1MDcsImV4cCI6MTU4NDI3MjEwNywiaXNzIjoiaHR0cHM6Ly9sb2dpbi11YXQucGFya2JlZS5uZXQiLCJhdWQiOlsiaHR0cHM6Ly9sb2dpbi11YXQucGFya2JlZS5uZXQvcmVzb3VyY2VzIiwiUGFya2JlZUFwaSJdLCJjbGllbnRfaWQiOiI2ZDhiNGY3YS1lNjJmLTQwNzUtOGZlZS03YjcyZWFiYjhmYTQiLCJzY29wZSI6WyJnYXJhZ2VzOnByaWNpbmc6cmVhZCIsImdhcmFnZXM6cmVhZCJdfQ.jdgTgjAkdCS2ALzhlfNiWQ9T3w_8LjTV4OFwjaHdplI2oPuxvBzHQTQKo0tZgadFmxj3O5Yh_felnQ-n_bcJ9jb6L2__03C7p26fzha_72ZrZBaF8Eq5CuMlxMc8hZmTIHMBEHuIBLNUIadCC9A7THNZ9jr91Ezj0EoC2zXjHBHAOJkiXSl5PmoQpk1jKRAJKAi4TrhNMUhp0J_UKsM-gdvbdODJBAnE7MIsJhURFLlqMujaRvb2X1qPl-5lTMsF37LNggz93giD4Mmh2Zry05IQSvgz-3_i7SwovuJ_cx9_vqUP_GvpEvd_Pweyi7CvHQ67j77EYSU1Vc32FxrVqw";
+        //You need to add the accessToken in order to authorize
+        string accessToken = "";
         string garageID = "afce8e5b-7fa7-4f1e-bb98-cfb9ce00ad1b";
              
         [SetUp]
@@ -70,7 +73,7 @@ namespace ParkBeeSulution.APITests
         [TestCase("2020-03-15Z12:00:00", "2020-03-15Z12:00:00")]
         [TestCase("2020-03-15Z12:00:00", "2100-03-15Z12:00:00")]
         /*The last one fails, the endpoint does not handle ridiculous dates in the future, 
-         * returns a negative number. Well, theoretically it should calculate, but maybe consider
+         * returns a negative number. Well, theoretically it calculates, but maybe consider
          * an error message for such future dates */
         [TestCase("2020-03-15Z12:00:00", "9999-03-15Z12:00:00")]
         public void PriceCalculatedWithValidData(string startTime, string endTime)
