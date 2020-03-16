@@ -32,15 +32,15 @@ Maybe could show the parking image only when a customer clicks on the parking sp
 
 - Noticed that it calculates the prices even if the dates posted are in the past. Not sure if that's needed, could be a validation when posting dates in the past.
 
-- Some vlaidation for the dates in the future could also be there, since it does not properly calculate prices for ridiculous dates suchs as in the year 9999-01-01
+- Some vlaidation for the dates in the future could also be there, since it does not properly calculate prices for ridiculous dates such as in the year 9999-01-01
 
 5. How would you improve your test suite if you had more time?
 
-I did the test only for specific price calculation endpoint, which is dependant on the data from 2 other endpoints.
+- I did the test only for specific price calculation endpoint, which is dependant on the data from 2 other endpoints.
 Currently I do hardcode the accessToken and garageID, but there should be methods for querying them dynamically.
-Also I did create a method for specificaly formatting the endpoint, but some kind of wrapper aound RestSharp client should be there too so that it could be more abstract and used for any other endpoint.
-Some different request Header types could also have been tested.
-Even though the endpoint method is POST, but the same endpint could be tested with GET, DELETE, UPDATE, etc method calls. Who knows what could happen ¯\_(ツ)_/¯
-More in depth Error message testing could be done.
-For UI tests I used a helper library that waits a bit too long, I could optimize the test for execution speed.
-UI tests selecting the date method could be improved to aways select the date in the future, since static data would fail at some point.
+- Also I did create a method for specificaly formatting the endpoint, but some kind of wrapper aound RestSharp client should be there too so that it could be more abstract and used for any other endpoint.
+- Some different request Header types could also have been tested.
+- Even though the endpoint method is POST, but the same endpint could be tested with GET, DELETE, UPDATE, etc method calls. Who knows what could happen ¯\_(ツ)_/¯
+- More in depth Error message testing could be done.
+- For UI tests I used a helper library that waits a bit too long, I could optimize the test for execution speed.
+- UI tests selecting the date method could be improved to aways select the date in the future, since static data would fail at some point.
